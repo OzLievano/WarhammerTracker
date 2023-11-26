@@ -1,0 +1,9 @@
+.login-form {
+  display:flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.login-form span {
+  display: block;
+}
