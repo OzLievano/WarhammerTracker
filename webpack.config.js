@@ -1,13 +1,14 @@
-const prod = process.env.NODE_ENV === 'production';
-
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-  mode: prod ? 'production' : 'development',
+  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   entry: './src/index.tsx',
   output: {
-    path: __dirname + '/dist/',
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -23,13 +24,17 @@ module.exports = {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
-    ]
+    ],
   },
-  devtool: prod ? undefined : 'source-map',
+  devtool: process.env.NODE_ENV !== 'production' ? 'source-map' : undefined,
+  devServer: {
+    historyApiFallback: true,
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: 'index.html',
     }),
     new MiniCssExtractPlugin(),
+    new Dotenv(),
   ],
 };

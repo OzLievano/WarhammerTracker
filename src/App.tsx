@@ -1,11 +1,12 @@
 import React, { FunctionComponent } from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LoginPage } from "./components/loginPage/LoginPage";
 import './app.css';
+import { HomePage } from "./components/HomePage";
 
 export const App:FunctionComponent = () => {
   return (
-    <div>
       <LoginPage/>
-    </div>
   )
 }

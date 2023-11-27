@@ -1,0 +1,6 @@
+.bottom-nav-bar {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-end;
+  list-style-type: none;
+}

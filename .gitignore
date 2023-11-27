@@ -1,0 +1,13 @@
+.env
+# Node.js
+node_modules/
+
+# macOS
+.DS_Store
+
+# Editor directories
+.vscode/
+.idea/
+
+# Build output
+dist/
