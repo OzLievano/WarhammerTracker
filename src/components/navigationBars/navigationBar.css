@@ -1,6 +1,37 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.bottom-nav {
+  box-sizing: border-box;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #fff; /* Add any background color you want */
+  border-top: 1px solid #ccc; /* Add a border or customize as needed */
+  padding: 10px;
+  box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+}
+
 .bottom-nav-bar {
   display: flex;
-  justify-content: space-evenly;
-  align-items: flex-end;
+  justify-content: space-around;
   list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.bottom-nav-bar li {
+  text-align: center;
+  padding: 10px;
+}
+
+.bottom-nav-bar li span {
+  display: block;
+  font-size: 12px; /* Customize the font size as needed */
+}
+
+.bottom-nav-bar li svg {
+  font-size: 24px; /* Customize the icon size as needed */
 }

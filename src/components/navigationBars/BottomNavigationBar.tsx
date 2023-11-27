@@ -5,13 +5,13 @@ import './navigationBar.css';
 
 export const BottomNavigationBar = () => {
   return (
-    <div>
+    <nav className='bottom-nav'>
       <ul className='bottom-nav-bar'>
         <li><FontAwesomeIcon icon={faHome} /></li>
         <li><FontAwesomeIcon icon={faKhanda} /></li>
         <li><FontAwesomeIcon icon={faChartColumn} /></li>
         <li><FontAwesomeIcon icon={faUser} /></li>
       </ul>
-    </div>
+    </nav>
   )
 }
