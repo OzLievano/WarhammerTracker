@@ -1,5 +1,5 @@
 import React from 'react'
-import { BottomNavigationBar } from './navigationBars/BottomNavigationBar'
+import { BottomNavigationBar } from '../navigationBars/BottomNavigationBar'
 
 export const HomePage = () => {
   return (
