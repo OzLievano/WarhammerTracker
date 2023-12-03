@@ -24,7 +24,7 @@ export const MatchSummary = () => {
         <p> Total Score : X </p>
 
       </div>
-
+      <button>Edit Match Rounds</button>
       <button>Submit Match Results</button>
       <BottomNavigationBar/>
     </div>

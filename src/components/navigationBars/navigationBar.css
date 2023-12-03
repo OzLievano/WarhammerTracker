@@ -8,8 +8,8 @@ body {
   position: fixed;
   bottom: 0;
   width: 100%;
-  background-color: #fff; /* Add any background color you want */
-  border-top: 1px solid #ccc; /* Add a border or customize as needed */
+  background-color: black; /* Add any background color you want */
+  border-top: 3px solid rgb(193, 193, 43);; /* Add a border or customize as needed */
   padding: 10px;
   box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
 }
@@ -34,4 +34,5 @@ body {
 
 .bottom-nav-bar li svg {
   font-size: 24px; /* Customize the icon size as needed */
+  color: rgb(193, 193, 43);
 }
