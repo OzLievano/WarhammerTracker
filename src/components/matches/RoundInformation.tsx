@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import {useNavigate} from 'react-router-dom';
 import { BottomNavigationBar } from '../navigationBars/BottomNavigationBar';
+import { HeaderBar } from '../headers/HeaderBar';
 
 export const RoundInformation = () => {
   const [currentRound, setCurrentRound] = useState(1);
@@ -11,6 +12,7 @@ export const RoundInformation = () => {
       hold2: false,
       holdMore: false,
       battleTactic: false,
+      grandStrategy: false,
       totalScore: 0,
     },
     player2: {
@@ -18,6 +20,7 @@ export const RoundInformation = () => {
       hold2: false,
       holdMore: false,
       battleTactic: false,
+      grandStrategy: false,
       totalScore: 0,
     },
   }))
@@ -31,19 +34,28 @@ export const RoundInformation = () => {
   const handleCheckboxChange = (roundIndex: number, playerIndex: number, checkboxName: string, isChecked: boolean) => {
     setMatchData((prevData) => {
       const newData = [...prevData];
+      const currentPlayerData = newData[roundIndex][`player${playerIndex + 1}`];
+      let totalScoreIncrement = isChecked ? 1 : -1;
+      if(checkboxName === 'battleTactic' && isChecked) {
+        totalScoreIncrement += 1;
+      } if (checkboxName === 'battleTactic' && !isChecked) {
+        totalScoreIncrement -= 1;
+      }
+      if(checkboxName === 'grandStrategy' && isChecked) {
+        totalScoreIncrement += 2;
+      } if (checkboxName === 'grandStrategy' && !isChecked) {
+        totalScoreIncrement -= 2;
+      }
       newData[roundIndex] = {
         ...newData[roundIndex],
         [`player${playerIndex + 1}`]: {
-          ...newData[roundIndex][`player${playerIndex + 1}`],
+          ...currentPlayerData,
           [checkboxName]: isChecked,
+          totalScore: currentPlayerData.totalScore + totalScoreIncrement,
         },
       };
       return newData;
     });
-  };
-
-  const handleTotalScoreChange = (roundIndex:number, playerIndex:number, value:number) => {
-    // Implement logic to update total score state
   };
   
   const handleSubmitResults = (e:any) => {
@@ -52,9 +64,9 @@ export const RoundInformation = () => {
   }
 
   return (
-    <div>
+    <div className='page-container'>
+      <HeaderBar/>
       <div>
-        {/* Navigation buttons */}
         {[1, 2, 3, 4, 5].map((round) => (
           <button key={round} onClick={() => handleRoundChange(round)}>
             Round {round}
@@ -65,10 +77,8 @@ export const RoundInformation = () => {
         <h2>Round {currentRound}</h2>
       <form>
           <h2>Player 1</h2>
-          {/* Render checkboxes based on matchData[currentRound - 1].player1.checkboxes */}
-          {/* Update handleCheckboxChange accordingly */}
           {Object.keys(matchData[currentRound - 1].player1)
-          .filter(checkboxName => checkboxName !== 'totalScore')
+          .filter(checkboxName => checkboxName !== 'totalScore' && checkboxName !== 'grandStrategy')
           .map((checkboxName) => (
             <label key={checkboxName}>
               {checkboxName}
@@ -80,27 +90,27 @@ export const RoundInformation = () => {
               />
             </label>
           ))}
-          
-          {/* Repeat for other checkboxes */}
-
-          {/* Total round score input */}
+          {currentRound === 5 ? (
+            <label>
+              Grand Strategy
+              <input
+                type="checkbox"
+                name='grandStrategy'
+              />
+            </label>
+          ) : <></>}
           <label>
             Total Round Score:
             <input
               type="number"
               value={matchData[currentRound - 1].player1.totalScore}
-              onChange={(e) => handleTotalScoreChange(currentRound - 1, 0, parseInt(e.target.value))}
             />
           </label>
         </form>
-
-        {/* Form for the current round and player 2 */}
         <form>
           <h2>Player 2</h2>
-          {/* Render checkboxes based on matchData[currentRound - 1].player2.checkboxes */}
-          {/* Update handleCheckboxChange accordingly */}
           {Object.keys(matchData[currentRound - 1].player2)
-          .filter(checkboxName => checkboxName !== 'totalScore')
+          .filter(checkboxName => checkboxName !== 'totalScore' && checkboxName !== 'grandStrategy')
           .map((checkboxName) => (  
             <label key={checkboxName}>
               {checkboxName}
@@ -112,21 +122,25 @@ export const RoundInformation = () => {
               />
             </label>
           ))}
-          {/* Repeat for other checkboxes */}
-
-          {/* Total round score input */}
+          {currentRound === 5 ? (
+            <label>
+              Grand Strategy
+              <input
+                type="checkbox"
+                name='grandStrategy'
+              />
+            </label>
+          ) : <></>}
           <label>
             Total Round Score:
             <input
               type="number"
               value={matchData[currentRound - 1].player2.totalScore}
-              onChange={(e) => handleTotalScoreChange(currentRound - 1, 1, parseInt(e.target.value))}
             />
           </label>
-          {currentRound === 5 ? <button onClick={handleSubmitResults}>Submit Match Results</button> : <></>}
+          {currentRound === 5 ? <button onClick={handleSubmitResults}>Review Match Results</button> : <></>}
         </form>
       </div>
-      {/* if round 5 , show submit score  */}
       <BottomNavigationBar/>
     </div>
   )

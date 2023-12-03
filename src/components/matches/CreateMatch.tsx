@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import { BottomNavigationBar } from '../navigationBars/BottomNavigationBar';
+import { HeaderBar } from '../headers/HeaderBar';
 
 export default function CreateMatch() {
 
@@ -27,7 +28,7 @@ export default function CreateMatch() {
   }
 
   return (
-    <div>
+    <div className='page-container'>
       {/* 
         redirect to matchRound Page 
           matchRound page 
@@ -35,6 +36,7 @@ export default function CreateMatch() {
             each button renders a roundForm with own values
             player can select battle tactics
       */}
+      <HeaderBar/>
       <form>
         <h2> Player 1 </h2>
         <label>

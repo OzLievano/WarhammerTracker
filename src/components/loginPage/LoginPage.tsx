@@ -2,6 +2,7 @@ import React, {FunctionComponent, ReactHTMLElement, useState} from 'react'
 import "./loginPage.css";
 import { dummyUsers } from '../../../userData';
 import {useNavigate} from 'react-router-dom';
+import { HeaderBar } from '../headers/HeaderBar';
 
 export const LoginPage:FunctionComponent = () => {
   const [userData, setUserData] = useState({
@@ -22,16 +23,16 @@ export const LoginPage:FunctionComponent = () => {
     }
   }
 
-  //TODO: handleChange
   const handleUserLoginInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setUserData({...userData,[e.target.name] : e.target.value})
   }
   
   return (
-    <div className='login-box'>
+    <div className='page-container'>
+      <HeaderBar/>
       <form className='login-form' onSubmit={login}>
-        <h1>Warhammer Tracker</h1>
+        <h1>Sigmar Tracker</h1>
         <label htmlFor="userName">
           <span>User Name:</span>
           <input name="userName" id="userName" required type="text" value={userData.userName} onChange={handleUserLoginInput}/>
