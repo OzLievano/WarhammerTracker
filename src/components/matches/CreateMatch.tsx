@@ -72,7 +72,7 @@ export default function CreateMatch() {
           Grand Strategy:
           <input type='text' name='grandstrategy'/>
         </label>
-        <button onSubmit={handleCreateMatch}>Submit</button>
+        <button onClick={handleCreateMatch}>Submit</button>
       </form>
       <BottomNavigationBar/>
     </div>

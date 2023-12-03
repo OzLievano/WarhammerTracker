@@ -67,7 +67,9 @@ export const RoundInformation = () => {
           <h2>Player 1</h2>
           {/* Render checkboxes based on matchData[currentRound - 1].player1.checkboxes */}
           {/* Update handleCheckboxChange accordingly */}
-          {Object.keys(matchData[currentRound - 1].player1).map((checkboxName) => (
+          {Object.keys(matchData[currentRound - 1].player1)
+          .filter(checkboxName => checkboxName !== 'totalScore')
+          .map((checkboxName) => (
             <label key={checkboxName}>
               {checkboxName}
               <input
@@ -97,7 +99,9 @@ export const RoundInformation = () => {
           <h2>Player 2</h2>
           {/* Render checkboxes based on matchData[currentRound - 1].player2.checkboxes */}
           {/* Update handleCheckboxChange accordingly */}
-          {Object.keys(matchData[currentRound - 1].player2).map((checkboxName) => (
+          {Object.keys(matchData[currentRound - 1].player2)
+          .filter(checkboxName => checkboxName !== 'totalScore')
+          .map((checkboxName) => (  
             <label key={checkboxName}>
               {checkboxName}
               <input
