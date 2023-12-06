@@ -1,26 +1,4 @@
-// Define interfaces for your data structure
-interface GrandstrategyData {
-  subfactions: string[];
-  battleTactics: string[];
-  Grandstrategies: string[];
-}
-
-interface SubfactionData {
-  subfactions: string[];
-  battleTactics: string[];
-  Grandstrategies: string[];
-}
-
-interface ArmyData {
-  [key: string]: SubfactionData;
-}
-
-interface AllArmyData {
-  Chaos: ArmyData;
-  Death: ArmyData;
-  Destruction: ArmyData;
-  Order: ArmyData;
-}
+import { AllArmyData } from "./constants";
 
 const battleTactics = ['Bait and Trap', 'Endless Expropriation', 'Intimidate the Invaders', 'Led into the Maelstrom', 'Magical Dominance', 'Magical Mayhem', 'Reprisal', 'Surround and Destroy'];
 const grandStrategies = ['Barren Icescape', 'Control the Nexus', 'Magic Made Manifest', 'Overshadow', 'Slaughter of Sorcery', 'Spellcasting Savant'];
@@ -170,25 +148,3 @@ export const allArmyAOSData:AllArmyData = {
     },
 }
 }
-
-export type AllianceKeys = keyof AllArmyData;
-
-// Extract the keys of subfactions dynamically
-type SubfactionKeysHelper<T extends AllianceKeys> = AllArmyData[T][keyof AllArmyData[T]]['subfactions'];
-
-export type SubfactionKeys<T extends AllianceKeys> = SubfactionKeysHelper<T>[number];
-
-export type ArmyKeys<T extends AllianceKeys> = keyof AllArmyData[T];
-
-// Utility functions
-export const getGrandAlliance = (): AllianceKeys[] => Object.keys(allArmyAOSData) as AllianceKeys[];
-
-export const getArmies = <T extends AllianceKeys>(alliance: T): ArmyKeys<T>[] =>
-  Object.keys(allArmyAOSData[alliance] || {}) as ArmyKeys<T>[];
-
-export const getSubfactions = <T extends AllianceKeys>(alliance: T, selectedArmy: ArmyKeys<T>): string[] =>
-  allArmyAOSData[alliance]?.[selectedArmy]?.subfactions || [];
-
-export const getGrandStrategies = <T extends AllianceKeys>(alliance: T, selectedArmy: ArmyKeys<T>): string[] =>
-  allArmyAOSData[alliance]?.[selectedArmy]?.Grandstrategies || [];
-
