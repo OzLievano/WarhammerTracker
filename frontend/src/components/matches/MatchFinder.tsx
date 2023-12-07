@@ -6,7 +6,7 @@ export const MatchFinder = () => {
   return (
     <div className='page-container'>
       <HeaderBar/>
-      Match Finder
+      COMING SOON TM
       {/* 
         match with unique ID 
           user selects options with 1/2 
