@@ -29,6 +29,8 @@ export default function CreateMatch() {
 
   const handleCreateMatch = () => {
     // this will submit data and redirect to 'match-1'
+    // send playerData: {p1Info, p2Info} 
+    // match : {matchId, status: started, playerData: {p1:{}, p2:{}}}
     navigate('/round-data');
   }
 

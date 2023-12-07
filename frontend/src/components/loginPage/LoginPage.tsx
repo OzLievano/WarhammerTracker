@@ -3,20 +3,24 @@ import "./loginPage.css";
 import { dummyUsers } from '../../../userData';
 import {useNavigate} from 'react-router-dom';
 import { HeaderBar } from '../headers/HeaderBar';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUser, selectUsers, selectUserById } from '../../slices/usersSlice';
 
 export const LoginPage:FunctionComponent = () => {
+  const dispatch = useDispatch();
+  const users = useSelector(selectUsers);
+  
   const [userData, setUserData] = useState({
     userName: '',
     userPassword: '',
   });
-
-
-  const isExistingUser = !!dummyUsers.find((user) => user.userName === userData.userName);
-
   const navigate = useNavigate();
   //TODO: onSubmit
   const login = () => {
+    const isExistingUser = users.hasOwnProperty(userData.userName);
     if(isExistingUser) {
+      const selectedUserId = users[userData.userName].id;
+      dispatch(getUser({ selectedUserId }));
       navigate('/home')
     } else {
       alert('User Does not Exist!')
@@ -42,6 +46,7 @@ export const LoginPage:FunctionComponent = () => {
           <input name="userPassword" id="userPassword" required type="password" value={userData.userPassword} onChange={handleUserLoginInput}/>
         </label>
         {/*TODO: wire up forgot password */}
+        <span>Create a New Account</span>
         <span>Forgot Password?</span>
         <button>Login</button>
       </form>
