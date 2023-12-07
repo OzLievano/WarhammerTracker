@@ -1,0 +1,27 @@
+.profile-image-box {
+  display: flex;
+  align-items: center;
+}
+
+.profile-image-box .user-icon{
+  padding: 10px;
+}
+
+.profile-info-card {
+  display: flex;
+  flex-flow: column;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.profile-info-items {
+  display: flex;
+  flex-flow: column;
+  align-content: space-between;
+}
+
+.profile-info-items span{
+  display: block;
+  padding: 5px;
+}

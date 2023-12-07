@@ -4,7 +4,7 @@ import { BottomNavigationBar } from '../navigationBars/BottomNavigationBar';
 import { HeaderBar } from '../headers/HeaderBar';
 import { AllianceKeys, ArmyKeys } from '../../utils/constants';
 import { allArmyAOSData } from '../../utils/armyData';
-import { getGrandAlliance, getArmies, getSubfactions, getGrandStrategies } from '../../utils/armyData.services';
+import { getGrandAlliance, getArmies, getSubfactions, getGrandStrategies } from '../../utils/armyData.service';
 
 export default function CreateMatch() {
 
