@@ -1,8 +1,8 @@
 import { createSlice, createSelector, PayloadAction } from '@reduxjs/toolkit'
 import { ThunkMiddleware, Middleware, AnyAction, Dispatch } from '@reduxjs/toolkit';
 import {v4 as uuidv4} from 'uuid'; 
+
 export const myMiddleware: Middleware<{}, { users: UserState }, Dispatch<AnyAction>> = (store) => (next) => (action) => {
-  // Your middleware logic here
   return next(action);
 };
 
@@ -16,12 +16,12 @@ export interface User {
 
 export interface UserState {
   users: Record<string, User>;
-  selectedUserId: string;
+  selectedUserId: string | null;
 }
 
 const initialState:UserState = {
   users: {},
-  selectedUserId: 'null',
+  selectedUserId: null,
 };
 
 const usersSlice = createSlice({
@@ -30,19 +30,20 @@ const usersSlice = createSlice({
   reducers: {
     createUser(state, action) {
       const user = action.payload;
-      state.users[user.Id]= {
-        id: uuidv4(),
+      const userId = uuidv4();
+      state.users[userId]= {
+        id: userId,
         name: user.name,
         username: user.username,
         password: user.password,
         region: user.region,
       }
     },
-    getUser(state:UserState, action:PayloadAction<{selectedUserId: string}>){
+    getUser(state: UserState, action: PayloadAction<{ selectedUserId: string }>) {
       return {
-        ...state, 
-        selectedUserId: action.payload.selectedUserId
-      }
+        ...state,
+        selectedUserId: action.payload.selectedUserId,
+      };
     }
   },
 })
@@ -51,7 +52,7 @@ const usersSlice = createSlice({
 export const selectUsers = (state: { users: UserState }) => state.users.users;
 
 // Additional selectors can be added using createSelector if needed
-export const selectUserById = (userId: number) =>
+export const selectUserById = (userId: string) =>
   createSelector([selectUsers], (users) => users[userId]);
 
 export const { createUser, getUser } = usersSlice.actions

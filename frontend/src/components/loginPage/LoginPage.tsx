@@ -9,7 +9,7 @@ import { getUser, selectUsers, selectUserById } from '../../slices/usersSlice';
 export const LoginPage:FunctionComponent = () => {
   const dispatch = useDispatch();
   const users = useSelector(selectUsers);
-  
+  console.log('users', users);
   const [userData, setUserData] = useState({
     userName: '',
     userPassword: '',
@@ -17,9 +17,11 @@ export const LoginPage:FunctionComponent = () => {
   const navigate = useNavigate();
 
   const login = () => {
-    const isExistingUser = users.hasOwnProperty(userData.userName);
-    if(isExistingUser) {
-      const selectedUserId = users[userData.userName].id;
+    const matchingUser = Object.values(users).find(
+      (user) => user.username === userData.userName
+    );
+    if(matchingUser) {
+      const selectedUserId = matchingUser.id;
       dispatch(getUser({ selectedUserId }));
       navigate('/home')
     } else {

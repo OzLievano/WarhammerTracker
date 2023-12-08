@@ -15,7 +15,7 @@ import { store } from './store';
 
 // `!` is a non-null assertion because we are sure the value will never be null
 const root = ReactDOM.createRoot(document.getElementById('root')!);
-
+console.log(store.getState());
 root.render(
   <React.StrictMode>
     <Provider store={store}>
