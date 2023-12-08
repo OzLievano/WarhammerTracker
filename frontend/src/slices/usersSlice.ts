@@ -1,13 +1,13 @@
-import { createSlice, createSelector } from '@reduxjs/toolkit'
+import { createSlice, createSelector, PayloadAction } from '@reduxjs/toolkit'
 import { ThunkMiddleware, Middleware, AnyAction, Dispatch } from '@reduxjs/toolkit';
-
+import {v4 as uuidv4} from 'uuid'; 
 export const myMiddleware: Middleware<{}, { users: UserState }, Dispatch<AnyAction>> = (store) => (next) => (action) => {
   // Your middleware logic here
   return next(action);
 };
 
-interface User {
-  id: number;
+export interface User {
+  id: string;
   name: string;
   username: string;
   password: string;
@@ -16,29 +16,29 @@ interface User {
 
 export interface UserState {
   users: Record<string, User>;
-  selectedUserId: null | number;
+  selectedUserId: string;
 }
 
 const initialState:UserState = {
   users: {},
-  selectedUserId: null,
+  selectedUserId: 'null',
 };
 
 const usersSlice = createSlice({
   name: 'users',
   initialState,
   reducers: {
-    userCreated(state, action) {
+    createUser(state, action) {
       const user = action.payload;
       state.users[user.Id]= {
-        id: user.id,
+        id: uuidv4(),
         name: user.name,
         username: user.username,
         password: user.password,
         region: user.region,
       }
     },
-    getUser(state, action){
+    getUser(state:UserState, action:PayloadAction<{selectedUserId: string}>){
       return {
         ...state, 
         selectedUserId: action.payload.selectedUserId
@@ -54,5 +54,5 @@ export const selectUsers = (state: { users: UserState }) => state.users.users;
 export const selectUserById = (userId: number) =>
   createSelector([selectUsers], (users) => users[userId]);
 
-export const { userCreated, getUser } = usersSlice.actions
+export const { createUser, getUser } = usersSlice.actions
 export default usersSlice.reducer

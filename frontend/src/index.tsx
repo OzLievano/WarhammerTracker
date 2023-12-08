@@ -9,23 +9,29 @@ import { ProfilePage } from './components/userProfile/ProfilePage';
 import CreateMatch from './components/matches/CreateMatch';
 import { RoundInformation } from './components/matches/RoundInformation';
 import { MatchSummary } from './components/matches/MatchSummary';
+import { CreateUserPage } from './components/loginPage/CreateUserPage';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 // `!` is a non-null assertion because we are sure the value will never be null
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-    <Routes>
-        <Route path='/' element={<App/>} />
-        <Route path='/home' element={<HomePage/>} />
-        <Route path='/leaderboards' element={<LeaderBoardHome/>} />
-        <Route path="/create-match" element={<CreateMatch/>}/>
-        <Route path="/match-summary" element={<MatchSummary />} />
-        <Route path="/round-data" element={<RoundInformation />} />
-        <Route path='/match-finder' element={<MatchFinder/>} />
-        <Route path='/user-profile' element={<ProfilePage/>} />
-      </Routes>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+      <Routes>
+          <Route path='/' element={<App />} />
+          <Route path='/create-user' element={<CreateUserPage/>}/>
+          <Route path='/home' element={<HomePage/>} />
+          <Route path='/leaderboards' element={<LeaderBoardHome/>} />
+          <Route path="/create-match" element={<CreateMatch/>}/>
+          <Route path="/match-summary" element={<MatchSummary />} />
+          <Route path="/round-data" element={<RoundInformation />} />
+          <Route path='/match-finder' element={<MatchFinder/>} />
+          <Route path='/user-profile' element={<ProfilePage/>} />
+        </Routes>
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );

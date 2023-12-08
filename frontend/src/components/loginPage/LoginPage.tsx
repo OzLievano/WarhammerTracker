@@ -15,7 +15,7 @@ export const LoginPage:FunctionComponent = () => {
     userPassword: '',
   });
   const navigate = useNavigate();
-  //TODO: onSubmit
+
   const login = () => {
     const isExistingUser = users.hasOwnProperty(userData.userName);
     if(isExistingUser) {
@@ -27,7 +27,11 @@ export const LoginPage:FunctionComponent = () => {
     }
   }
 
-  const handleUserLoginInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const navigateToCreateNewUser = () => {
+    navigate('/create-user')
+  }
+
+  const handleUserLoginInformation = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setUserData({...userData,[e.target.name] : e.target.value})
   }
@@ -38,15 +42,15 @@ export const LoginPage:FunctionComponent = () => {
       <form className='login-form' onSubmit={login}>
         <h1>Sigmar Tracker</h1>
         <label htmlFor="userName">
-          <span>User Name:</span>
-          <input name="userName" id="userName" required type="text" value={userData.userName} onChange={handleUserLoginInput}/>
+          User Name:
+          <input name="userName" id="userName" required type="text" value={userData.userName} onChange={handleUserLoginInformation}/>
         </label>
         <label htmlFor='userPassword'>
-          <span>Password:</span>
-          <input name="userPassword" id="userPassword" required type="password" value={userData.userPassword} onChange={handleUserLoginInput}/>
+          Password:
+          <input name="userPassword" id="userPassword" required type="password" value={userData.userPassword} onChange={handleUserLoginInformation}/>
         </label>
         {/*TODO: wire up forgot password */}
-        <span>Create a New Account</span>
+        <span className='create-user' onClick={navigateToCreateNewUser}>Create a New Account</span>
         <span>Forgot Password?</span>
         <button>Login</button>
       </form>

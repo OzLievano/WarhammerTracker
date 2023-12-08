@@ -1,18 +1,18 @@
-import { createSlice } from '@reduxjs/toolkit'
+// import { createSlice } from '@reduxjs/toolkit'
 
-const matchesSlice = createSlice({
-  name: 'matches',
-  initialState: [],
-  reducers: {
-    matchCreated(state, action) {
-      state.push({
-        id: action.payload.id,
-        playerData: action.payload.playerData,
-        status: 'status',
-      })
-    },
-  },
-})
+// const matchesSlice = createSlice({
+//   name: 'matches',
+//   initialState: [],
+//   reducers: {
+//     // matchCreated(state, action) {
+//     //   state.push({
+//     //     id: action.payload.id,
+//     //     playerData: action.payload.playerData,
+//     //     status: 'status',
+//     //   })
+//     // },
+//   },
+// })
 
-export const { matchCreated } = todosSlice.actions
-export default matchesSliceSlice.reducer
+// // export const {  } = matchesSlice.actions
+// export default matchesSlice.reducer
